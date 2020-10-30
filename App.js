@@ -1,36 +1,54 @@
-import React  from 'react';
-import './App.css';
+import React, { Component } from 'react'
 
-let i=0;
-const items= [1,1,1,0,1,9,1,0,1,2,2,1,0,1,9,1];
-function renderScreen(item){
-  i++;
-  if(i%4!=0){
-      return(
-        <div className="main">{item}</div>
-      );
+const mydata = 'sampleApp';
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      content: '',
+      name: '',
+    }
+    this.handleFormInputChanged = this.handleFormInputChanged.bind(this)
   }
-  else{
-    return(
-      <div>
-        <div className="main">{item}</div>
-        <br/>
+ 
+  handleFormInputChanged(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
+    //データの保存
+    //第一 key これで出し入れする
+    //第二　content 保存するデータ
+    localStorage.setItem(mydata, JSON.stringify(this.state.content));
+  }
+
+  getItem(){
+    //データの取得
+    //keyでほしいじょうほうの取得
+    
+    let aa = JSON.parse(localStorage.getItem(mydata));
+    this.setState({name: aa});
+  }
+
+  render() {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <div>サンプル</div>
+        <textarea
+          name="content"
+          value={this.state.content}
+          onChange={this.handleFormInputChanged}
+          style={{
+            width: '400px',
+            height: '300px',
+            fontSize: '15px',
+          }}
+        />
+        <button onClick={()=>this.getItem()}>get</button>
+        <div style={{ marginTop: '10px' }}>{this.state.content}</div>
+        <div style={{ marginTop: '20px' }}>{this.state.name}</div>
       </div>
     )
   }
 }
-class App extends React.Component{
-    render() {
-      return (
-        <div>
-          <div className="maincontent">
-            {items.map((item) => (
-              renderScreen(item)
-            ))}
-          </div>
-        </div>
-      );
-    }
-}
-
-export default App;
+ 
+export default App
