@@ -1,8 +1,14 @@
 import React from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 const NotFound =()=>{
     return(
-    <h1>Not Found</h1>
+    <div>
+        <h1>Not Found</h1>
+        <Link to="/">
+            <button>戻る</button>
+        </Link>
+    </div>
     );
 }
 
