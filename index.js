@@ -7,6 +7,11 @@ import * as serviceWorker from './serviceWorker';
 import End from './End';
 import Start from './Start';
 import NotFound from './404';
+import firebase from 'firebase';
+import { firebaseConfig } from './firebase/config.js';
+
+export const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const firebaseDb = firebaseApp.database();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
